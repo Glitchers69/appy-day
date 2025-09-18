@@ -61,7 +61,7 @@ const BalloonGamePage = () => {
   };
 
   const handleContinue = () => {
-    navigate('/final-love');
+    navigate('/heart-collector');
   };
 
   return (

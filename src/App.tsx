@@ -5,8 +5,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import LoveQuestionPage from "./pages/LoveQuestionPage";
+import FakeLoadingPage from "./pages/FakeLoadingPage";
 import ThingsILovePage from "./pages/ThingsILovePage";
+import SillyQuizPage from "./pages/SillyQuizPage";
 import BalloonGamePage from "./pages/BalloonGamePage";
+import HeartCollectorGame from "./pages/HeartCollectorGame";
 import FinalLovePage from "./pages/FinalLovePage";
 import NotFound from "./pages/NotFound";
 
@@ -21,8 +24,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/love-question" element={<LoveQuestionPage />} />
+          <Route path="/fake-loading" element={<FakeLoadingPage />} />
           <Route path="/things-i-love" element={<ThingsILovePage />} />
+          <Route path="/silly-quiz" element={<SillyQuizPage />} />
           <Route path="/balloon-game" element={<BalloonGamePage />} />
+          <Route path="/heart-collector" element={<HeartCollectorGame />} />
           <Route path="/final-love" element={<FinalLovePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

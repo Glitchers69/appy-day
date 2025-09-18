@@ -38,7 +38,7 @@ const ThingsILovePage = () => {
   }, []);
 
   const handleContinue = () => {
-    navigate('/balloon-game');
+    navigate('/silly-quiz');
   };
 
   return (

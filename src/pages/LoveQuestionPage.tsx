@@ -11,7 +11,7 @@ const LoveQuestionPage = () => {
   const [isWiggling, setIsWiggling] = useState(false);
 
   const handleYesClick = () => {
-    navigate('/things-i-love');
+    navigate('/fake-loading');
   };
 
   const handleNoHover = () => {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Heart, Sparkles } from 'lucide-react';
 
 const FinalLovePage = () => {
@@ -72,23 +73,36 @@ const FinalLovePage = () => {
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold text-primary mb-6 font-caveat leading-tight">
-            I Love You ❤️
+            Fiiine... Happy Birthday! 🎂
           </h1>
           
           <h2 className="text-2xl md:text-3xl font-semibold text-celebration mb-8 font-caveat">
-            Happy Birthday, Beautiful! 🎉
+            I Love You ❤️
           </h2>
           
           <div className="space-y-6 text-lg md:text-xl text-secondary-foreground leading-relaxed">
             <p className="font-medium">
-              Thank you for being the most amazing person in my life. 
+              Okay, okay... you caught me! 😅
             </p>
             <p>
-              Every day with you is a gift, and today we celebrate the gift that is <strong>you</strong>! 
+              I couldn't keep pretending this wasn't all about celebrating the most amazing person ever... 
             </p>
             <p className="text-primary font-caveat text-2xl">
               You make my heart so full! 💕✨
             </p>
+            
+            <div className="mt-8">
+              <Button 
+                onClick={() => {
+                  // Trigger infinite hug animation
+                  const hugElements = document.querySelectorAll('.hug-spam');
+                  hugElements.forEach(el => el.classList.add('animate-pulse'));
+                }}
+                className="btn-bouncy bg-gradient-to-r from-celebration to-celebration-glow text-white px-8 py-4 text-lg font-semibold rounded-2xl mb-4"
+              >
+                Press for Infinite Hugs! 🤗
+              </Button>
+            </div>
           </div>
 
           {/* Pulsing Heart Effect */}
