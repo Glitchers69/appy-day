@@ -8,21 +8,46 @@ const FakeLoadingPage = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(0);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentImage, setCurrentImage] = useState('');
+
+  // List of all images in loadimg folder
+  const imageList = [
+    'IMG_0463.png', 'IMG_0508.png', 'IMG_0509.png', 'IMG_0579.png', 'IMG_0581.png',
+    'IMG_0860.png', 'IMG_0882.png', 'IMG_0906.png', 'IMG_0913.png', 'IMG_1019.png',
+    'IMG_1021.png', 'IMG_1022.png', 'IMG_1083.png', 'IMG_1085.png', 'IMG_1111.png',
+    'IMG_1136.png', 'IMG_1139.png', 'IMG_4423.png', 'IMG_6508.png', 'IMG_6784.png',
+    'IMG_7584.png', 'IMG_7950.png', 'IMG_8759.png', 'IMG_8867.png', 'IMG_9795.png',
+    'IMG_9796.png'
+  ];
 
   const loadingSteps = [
-    { text: "Generating your cuteness score...", emoji: "🥰", duration: 1500 },
-    { text: "Loading unlimited cuddles...", emoji: "🤗", duration: 1200 },
-    { text: "Installing girlfriend.exe v∞", emoji: "💖", duration: 1000 },
-    { text: "Calibrating drama levels...", emoji: "🎭", duration: 800 },
-    { text: "Downloading extra sass...", emoji: "💁‍♀️", duration: 900 },
-    { text: "Buffering your adorableness...", emoji: "✨", duration: 700 },
-    { text: "Synchronizing heart frequencies...", emoji: "💕", duration: 1100 },
-    { text: "Ready to proceed!", emoji: "🎉", duration: 800 }
+    { text: "Generating your cuteness score...", duration: 1500 },
+    { text: "Loading unlimited cuddles...", duration: 1200 },
+    { text: "Installing girlfriend.exe v∞", duration: 1000 },
+    { text: "Calibrating drama levels...", duration: 800 },
+    { text: "Downloading extra sass...", duration: 900 },
+    { text: "Buffering your adorableness...", duration: 700 },
+    { text: "Synchronizing heart frequencies...", duration: 1100 },
+    { text: "Ready to proceed!", duration: 800 }
   ];
+
+  // Function to get a random image
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * imageList.length);
+    return imageList[randomIndex];
+  };
 
   useEffect(() => {
     const totalSteps = loadingSteps.length;
     let currentStep = 0;
+    
+    // Set initial image
+    setCurrentImage(getRandomImage());
+    
+    // Image rotation interval - changes image every 2000ms (2 seconds)
+    const imageInterval = setInterval(() => {
+      setCurrentImage(getRandomImage());
+    }, 2000);
     
     const stepInterval = setInterval(() => {
       if (currentStep < totalSteps - 1) {
@@ -31,11 +56,15 @@ const FakeLoadingPage = () => {
         setProgress((currentStep / (totalSteps - 1)) * 100);
       } else {
         clearInterval(stepInterval);
+        clearInterval(imageInterval);
         setTimeout(() => navigate('/things-i-love'), 1000);
       }
-    }, 1200);
+    }, 3000);
 
-    return () => clearInterval(stepInterval);
+    return () => {
+      clearInterval(stepInterval);
+      clearInterval(imageInterval);
+    };
   }, [navigate]);
 
   const getRandomIcon = () => {
@@ -66,10 +95,18 @@ const FakeLoadingPage = () => {
 
       <Card className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl max-w-md text-center border-0 relative z-10">
         <div className="mb-8">
-          <div className="w-20 h-20 bg-gradient-to-r from-primary to-primary-glow rounded-full mx-auto mb-4 flex items-center justify-center animate-pulse">
-            <span className="text-3xl animate-bounce">
-              {loadingSteps[currentStepIndex]?.emoji}
-            </span>
+          <div className="w-48 h-48 bg-gradient-to-r from-primary to-primary-glow rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-lg">
+            {currentImage && (
+              <img 
+                src={`/src/img/loadimg/${currentImage}`}
+                alt="Loading..."
+                className="w-44 h-44 object-cover rounded-full transition-all duration-500 ease-in-out hover:scale-105"
+                onError={(e) => {
+                  // Fallback to a random image if the current one fails to load
+                  setCurrentImage(getRandomImage());
+                }}
+              />
+            )}
           </div>
         </div>
         

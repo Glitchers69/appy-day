@@ -9,7 +9,6 @@ import FakeLoadingPage from "./pages/FakeLoadingPage";
 import ThingsILovePage from "./pages/ThingsILovePage";
 import SillyQuizPage from "./pages/SillyQuizPage";
 import BalloonGamePage from "./pages/BalloonGamePage";
-import HeartCollectorGame from "./pages/HeartCollectorGame";
 import FinalLovePage from "./pages/FinalLovePage";
 import NotFound from "./pages/NotFound";
 
@@ -28,7 +27,6 @@ const App = () => (
           <Route path="/things-i-love" element={<ThingsILovePage />} />
           <Route path="/silly-quiz" element={<SillyQuizPage />} />
           <Route path="/balloon-game" element={<BalloonGamePage />} />
-          <Route path="/heart-collector" element={<HeartCollectorGame />} />
           <Route path="/final-love" element={<FinalLovePage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Eye, MousePointer, Sparkles } from 'lucide-react';
+import introWebm from '@/img/intro/Untitled.webm';
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [phase, setPhase] = useState('nonchalant'); // nonchalant, reveal, celebration
   const [showConfetti, setShowConfetti] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const [rotationDeg, setRotationDeg] = useState(0);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
     const timer1 = setTimeout(() => setPhase('reveal'), 3000);
@@ -77,6 +81,53 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden flex items-center justify-center px-4">
+      {/* Intro looping video */}
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 text-center select-none">
+        <div className="relative mx-auto w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden shadow-2xl ring-4 ring-primary/30">
+          <video
+            ref={videoRef}
+            autoPlay
+            muted={muted}
+            loop
+            playsInline
+            preload="auto"
+            controls={!muted}
+            className="w-full h-full object-cover"
+            style={{ transform: rotationDeg ? `rotate(${rotationDeg}deg) scale(1.08)` : undefined }}
+            onLoadedMetadata={() => {
+              const v = videoRef.current;
+              if (!v) return;
+              const isLandscape = v.videoWidth > v.videoHeight;
+              // If the source is landscape, rotate to fit the circular portrait layout
+              // Use -90deg to avoid upside-down orientation on some devices
+              setRotationDeg(isLandscape ? -90 : 0);
+            }}
+          >
+            {/* Prefer WebM (VP9/Opus) for Chrome/Android */}
+            <source src={introWebm} type="video/webm" />
+            {/* Fallback to MP4 (H.264/AAC) from public if present */}
+            <source src="/intro/Untitled.mp4" type="video/mp4" />
+          </video>
+          {muted && (
+            <button
+              onClick={() => {
+                setMuted(false);
+                if (videoRef.current) {
+                  videoRef.current.muted = false;
+                  videoRef.current.volume = 1;
+                  videoRef.current.play().catch(() => {});
+                }
+              }}
+              className="absolute inset-x-6 bottom-4 rounded-full bg-black/60 text-white text-xs md:text-sm px-3 py-2 shadow-lg backdrop-blur-sm"
+            >
+              Tap for sound 🔊
+            </button>
+          )}
+        </div>
+        <p className="mt-3 text-sm md:text-base text-muted-foreground font-caveat">
+          Someone says hello…
+        </p>
+      </div>
       {/* Confetti Animation */}
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-10">
@@ -96,7 +147,7 @@ const LandingPage = () => {
       )}
 
       {/* Main Content */}
-      <Card className={`bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-xl max-w-lg border-0 relative transition-all duration-1000 ${
+      <Card className={`bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-xl max-w-lg border-0 relative transition-all duration-1000 pt-28 md:pt-36 ${
         phase === 'nonchalant' ? 'bg-white/60 border-muted' : 
         phase === 'reveal' ? 'bg-white/80 border-accent/20' : 
         'bg-white/95 border-primary/20'

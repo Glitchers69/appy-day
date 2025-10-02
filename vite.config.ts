@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // Treat common video formats as static assets so they can be imported
+  assetsInclude: ["**/*.m4v", "**/*.mov", "**/*.mp4", "**/*.webm"],
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
