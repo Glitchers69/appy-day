@@ -21,13 +21,13 @@ const FakeLoadingPage = () => {
   ];
 
   const loadingSteps = [
-    { text: "Generating your cuteness score...", duration: 1500 },
-    { text: "Loading unlimited cuddles...", duration: 1200 },
-    { text: "Installing girlfriend.exe v∞", duration: 1000 },
+    { text: "Generating your dumbo score...", duration: 1500 },
+    { text: "Loading warm cuddles...", duration: 1200 },
+    { text: "Installing girlfriend.exe ", duration: 1000 },
     { text: "Calibrating drama levels...", duration: 800 },
     { text: "Downloading extra sass...", duration: 900 },
-    { text: "Buffering your adorableness...", duration: 700 },
-    { text: "Synchronizing heart frequencies...", duration: 1100 },
+    { text: "Buffering your tiny pp...", duration: 700 },
+    { text: "Stealing your heart...", duration: 1100 },
     { text: "Ready to proceed!", duration: 800 }
   ];
 
@@ -70,11 +70,11 @@ const FakeLoadingPage = () => {
   const getRandomIcon = () => {
     const icons = [Heart, Sparkles, Zap, Coffee];
     const Icon = icons[Math.floor(Math.random() * icons.length)];
-    return <Icon className="w-6 h-6 text-primary animate-spin" />;
+    return <Icon className="w-6 h-6 text-amber-700 animate-spin" />;
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary/20 via-secondary/30 to-accent/20 relative overflow-hidden flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 relative overflow-hidden flex items-center justify-center px-4">
       {/* Floating Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(15)].map((_, i) => (

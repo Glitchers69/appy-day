@@ -47,11 +47,11 @@ const BalloonGamePage = () => {
   ];
 
   const colors = [
-    'bg-primary',
-    'bg-secondary', 
-    'bg-accent',
-    'bg-celebration',
-    'bg-muted'
+    'bg-amber-700',
+    'bg-amber-600', 
+    'bg-stone-400',
+    'bg-amber-500',
+    'bg-stone-300'
   ];
 
   // Function to get a random unused image
@@ -124,21 +124,21 @@ const BalloonGamePage = () => {
   };
 
   const handleContinue = () => {
-    navigate('/final-love');
+    navigate('/video-timeline');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-celebration/20 via-accent/30 to-primary/20 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 relative overflow-hidden">
       {/* Game Header */}
       <div className="absolute top-6 left-6 right-6 z-10">
-        <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border-0 shadow-lg">
+        <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border-0 shadow-lg border border-amber-200/50">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-primary font-caveat">
+            <h1 className="text-2xl font-bold text-amber-800 font-mono">
               Pop the Balloons! 🎈
             </h1>
             <div className="flex items-center gap-2">
-              <Trophy className="w-6 h-6 text-celebration" />
-              <span className="text-xl font-bold text-celebration">{score}</span>
+              <Trophy className="w-6 h-6 text-amber-700" />
+              <span className="text-xl font-bold text-amber-700">{score}</span>
             </div>
           </div>
         </Card>
@@ -163,9 +163,9 @@ const BalloonGamePage = () => {
             <div
               className={`w-full h-full rounded-full ${balloon.color} opacity-80 shadow-lg flex items-center justify-center relative`}
             >
-              <Heart className="w-6 h-6 text-white animate-pulse" />
+              <Heart className="w-6 h-6 text-amber-50 animate-pulse" />
               {/* Balloon string */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-gray-400"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-stone-400"></div>
             </div>
           </div>
         ))}
@@ -183,7 +183,7 @@ const BalloonGamePage = () => {
           >
             <div className="relative">
               {/* Cute frame around the image */}
-              <div className="w-32 h-32 bg-white rounded-2xl shadow-2xl border-4 border-pink-200 p-2 animate-bounce">
+              <div className="w-32 h-32 bg-white rounded-2xl shadow-2xl border-4 border-amber-200 p-2 animate-bounce">
                 <img
                   src={`/src/img/mainimg/${poppedImage.image}`}
                   alt="Surprise!"
@@ -194,13 +194,13 @@ const BalloonGamePage = () => {
                   }}
                 />
                 {/* Sparkle effects */}
-                <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-300 rounded-full animate-ping"></div>
-                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-pink-300 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
-                <div className="absolute top-1/2 -right-3 w-2 h-2 bg-blue-300 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+                <div className="absolute -top-2 -right-2 w-4 h-4 bg-amber-300 rounded-full animate-ping"></div>
+                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-amber-200 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+                <div className="absolute top-1/2 -right-3 w-2 h-2 bg-stone-300 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
               </div>
               {/* Heart floating above */}
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
-                <Heart className="w-6 h-6 text-red-400 animate-bounce" />
+                <Heart className="w-6 h-6 text-amber-700 animate-bounce" />
               </div>
             </div>
           </div>
@@ -210,23 +210,23 @@ const BalloonGamePage = () => {
       {/* Game Complete Modal */}
       {gameComplete && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-20 p-4">
-          <Card className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-md text-center border-0 animate-scale-in">
-            <Trophy className="w-16 h-16 text-celebration mx-auto mb-4 animate-bounce" />
-            <h2 className="text-3xl font-bold text-primary mb-4 font-caveat">
+          <Card className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-md text-center border-0 animate-scale-in border border-amber-200/50">
+            <Trophy className="w-16 h-16 text-amber-700 mx-auto mb-4 animate-bounce" />
+            <h2 className="text-3xl font-bold text-amber-800 mb-4 font-mono">
               Amazing! 🎉
             </h2>
-            <p className="text-muted-foreground text-lg mb-2">
+            <p className="text-stone-600 text-lg mb-2">
               You popped all the balloons!
             </p>
-            <p className="text-celebration text-2xl font-bold mb-6">
+            <p className="text-amber-700 text-2xl font-bold mb-6">
               Final Score: {score}
             </p>
-            <p className="text-primary font-caveat text-xl mb-8">
+            <p className="text-amber-800 font-mono text-xl mb-8">
               You're ready for the final surprise! 💕
             </p>
             <Button 
               onClick={handleContinue}
-              className="btn-bouncy bg-gradient-to-r from-primary to-celebration text-white px-8 py-4 text-xl font-semibold rounded-2xl w-full"
+              className="btn-bouncy bg-gradient-to-r from-amber-700 to-amber-600 text-amber-50 px-8 py-4 text-xl font-semibold rounded-2xl w-full"
               size="lg"
             >
               Show Me! 
@@ -239,8 +239,8 @@ const BalloonGamePage = () => {
       {/* Instructions */}
       {!gameComplete && score === 0 && (
         <div className="absolute bottom-6 left-6 right-6">
-          <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border-0 shadow-lg text-center">
-            <p className="text-muted-foreground font-caveat text-lg">
+          <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border-0 shadow-lg text-center border border-amber-200/50">
+            <p className="text-amber-700/70 font-mono text-lg">
               Tap the balloons to pop them and earn points! 💖
             </p>
           </Card>

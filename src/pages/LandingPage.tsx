@@ -32,14 +32,14 @@ const LandingPage = () => {
 
   const getNonchalantContent = () => (
     <div className="text-center">
-      <Eye className="w-12 h-12 text-muted-foreground mx-auto mb-4 animate-pulse" />
-      <h1 className="text-3xl md:text-4xl font-bold text-muted-foreground mb-4 font-fredoka">
+      <Eye className="w-12 h-12 text-amber-700/70 mx-auto mb-4 animate-pulse" />
+      <h1 className="text-3xl md:text-4xl font-bold text-amber-800 mb-4 font-mono">
         Oh... hey, you found this page 👀
       </h1>
-      <p className="text-muted-foreground text-lg mb-4">
+      <p className="text-amber-700 text-lg mb-4">
         Nothing special here... definitely not about you 🙄
       </p>
-      <p className="text-sm text-muted-foreground/60 animate-pulse">
+      <p className="text-sm text-amber-600/60 animate-pulse">
         Just a random website... move along...
       </p>
     </div>
@@ -47,11 +47,11 @@ const LandingPage = () => {
 
   const getRevealContent = () => (
     <div className="text-center animate-fade-in">
-      <MousePointer className="w-16 h-16 text-accent mx-auto mb-4 animate-bounce" />
-      <h1 className="text-3xl md:text-4xl font-bold text-accent mb-4 font-fredoka animate-scale-in">
+      <MousePointer className="w-16 h-16 text-amber-600 mx-auto mb-4 animate-bounce" />
+      <h1 className="text-3xl md:text-4xl font-bold text-amber-700 mb-4 font-mono animate-scale-in">
         Okay fine... it's YOUR birthday 🎉
       </h1>
-      <p className="text-secondary-foreground text-lg mb-4 animate-fade-in">
+      <p className="text-amber-800 text-lg mb-4 animate-fade-in">
         I couldn't keep pretending... 😅
       </p>
     </div>
@@ -59,31 +59,31 @@ const LandingPage = () => {
 
   const getCelebrationContent = () => (
     <div className="text-center">
-      <Sparkles className="w-20 h-20 text-celebration mx-auto mb-6 animate-spin" style={{animationDuration: '3s'}} />
-      <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2 font-caveat animate-scale-in">
+      <Sparkles className="w-20 h-20 text-amber-600 mx-auto mb-6 animate-spin" style={{animationDuration: '3s'}} />
+      <h1 className="text-4xl md:text-5xl font-bold text-amber-800 mb-2 font-mono animate-scale-in">
         Happy Birthday
       </h1>
-      <h2 className="text-2xl md:text-3xl font-semibold text-celebration mb-6 font-caveat">
+      <h2 className="text-2xl md:text-3xl font-semibold text-amber-700 mb-6 font-mono">
         Beautiful! ✨
       </h2>
-      <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
+      <p className="text-amber-700/90 mb-8 text-lg leading-relaxed">
         Ready for a silly little adventure I made just for you? 💕
       </p>
       <Button 
         onClick={handleContinue}
-        className="btn-bouncy bg-gradient-to-r from-primary to-primary-glow text-white px-8 py-6 text-xl font-semibold rounded-2xl w-full animate-bounce"
+        className="btn-bouncy bg-gradient-to-r from-amber-700 to-amber-600 text-amber-50 px-8 py-6 text-xl font-semibold rounded-2xl w-full animate-bounce"
         size="lg"
       >
-        Let's Go! 🎮
+        Let's Go! ☕
       </Button>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-muted/30 via-background to-muted/20 relative overflow-hidden flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 relative overflow-hidden flex items-center justify-center px-4">
       {/* Intro looping video */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 text-center select-none">
-        <div className="relative mx-auto w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden shadow-2xl ring-4 ring-primary/30">
+        <div className="relative mx-auto w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-600/30">
           <video
             ref={videoRef}
             autoPlay
@@ -118,13 +118,13 @@ const LandingPage = () => {
                   videoRef.current.play().catch(() => {});
                 }
               }}
-              className="absolute inset-x-6 bottom-4 rounded-full bg-black/60 text-white text-xs md:text-sm px-3 py-2 shadow-lg backdrop-blur-sm"
+              className="absolute inset-x-6 bottom-4 rounded-full bg-amber-900/60 text-amber-50 text-xs md:text-sm px-3 py-2 shadow-lg backdrop-blur-sm"
             >
               Tap for sound 🔊
             </button>
           )}
         </div>
-        <p className="mt-3 text-sm md:text-base text-muted-foreground font-caveat">
+        <p className="mt-3 text-sm md:text-base text-amber-800 font-mono">
           Someone says hello…
         </p>
       </div>
@@ -137,7 +137,7 @@ const LandingPage = () => {
               className="confetti"
               style={{
                 left: `${Math.random() * 100}%`,
-                backgroundColor: ['hsl(var(--primary))', 'hsl(var(--celebration))', 'hsl(var(--accent))', 'hsl(var(--secondary))'][i % 4],
+                backgroundColor: ['#d4a574', '#e8c39e', '#a68a7b', '#8B5A2B'][i % 4],
                 animationDelay: `${Math.random() * 2}s`,
                 animationDuration: `${2 + Math.random() * 2}s`
               }}
@@ -148,9 +148,9 @@ const LandingPage = () => {
 
       {/* Main Content */}
       <Card className={`bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-xl max-w-lg border-0 relative transition-all duration-1000 pt-28 md:pt-36 ${
-        phase === 'nonchalant' ? 'bg-white/60 border-muted' : 
-        phase === 'reveal' ? 'bg-white/80 border-accent/20' : 
-        'bg-white/95 border-primary/20'
+        phase === 'nonchalant' ? 'bg-white/60 border-amber-200' : 
+        phase === 'reveal' ? 'bg-white/80 border-amber-400/20' : 
+        'bg-white/95 border-amber-600/20'
       }`}>
         {phase === 'nonchalant' && getNonchalantContent()}
         {phase === 'reveal' && getRevealContent()}

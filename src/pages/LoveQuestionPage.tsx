@@ -31,18 +31,18 @@ const LoveQuestionPage = () => {
     if (noButtonClicks === 0) return "No";
     if (noButtonClicks < 3) return "Really? 🤔";
     if (noButtonClicks < 5) return "Come on... 😊";
-    if (noButtonClicks < 8) return "Pretty please? 🥺";
-    return "You know you do! 😘";
+    if (noButtonClicks < 8) return "Stop clicking no da mf 😡";
+    return "You know you do 😘";
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-secondary/30 via-primary/20 to-accent/30 relative overflow-hidden flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 relative overflow-hidden flex items-center justify-center px-4">
       {/* Floating Hearts Background */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(12)].map((_, i) => (
           <Heart
             key={i}
-            className={`absolute text-primary/20 animate-pulse`}
+            className={`absolute text-amber-700/20 animate-pulse`}
             size={24 + (i % 3) * 16}
             style={{
               left: `${10 + (i * 8)}%`,
@@ -54,23 +54,23 @@ const LoveQuestionPage = () => {
         ))}
       </div>
 
-      <Card className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg text-center border-0 relative">
+      <Card className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl max-w-lg text-center border-0 relative border border-amber-200/50">
         <div className="mb-8">
-          <Heart className="w-20 h-20 text-primary mx-auto mb-6 heart-grow" />
+          <Heart className="w-20 h-20 text-amber-700 mx-auto mb-6 heart-grow" />
         </div>
         
-        <h1 className="text-3xl md:text-4xl font-bold text-primary mb-6 font-caveat">
+        <h1 className="text-3xl md:text-4xl font-bold text-amber-800 mb-6 font-mono">
           Before we continue...
         </h1>
         
-        <h2 className="text-2xl md:text-3xl font-semibold text-secondary-foreground mb-8 font-caveat">
+        <h2 className="text-2xl md:text-3xl font-semibold text-amber-700 mb-8 font-mono">
           Do you love me? 💕
         </h2>
         
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center relative min-h-[120px]">
           <Button 
             onClick={handleYesClick}
-            className="btn-bouncy bg-gradient-to-r from-primary to-primary-glow text-white px-12 py-4 text-xl font-semibold rounded-2xl"
+            className="btn-bouncy bg-gradient-to-r from-amber-700 to-amber-600 text-amber-50 px-12 py-4 text-xl font-semibold rounded-2xl"
             size="lg"
           >
             Yes! 💖
@@ -80,7 +80,7 @@ const LoveQuestionPage = () => {
             <Button
               onMouseEnter={handleNoHover}
               onClick={handleNoClick}
-              className={`btn-bouncy bg-gradient-to-r from-muted to-muted-foreground/20 text-muted-foreground px-12 py-4 text-xl font-semibold rounded-2xl transition-all duration-300 ${isWiggling ? 'wiggle' : ''}`}
+              className={`btn-bouncy bg-gradient-to-r from-stone-200 to-stone-300/50 text-stone-600 px-12 py-4 text-xl font-semibold rounded-2xl transition-all duration-300 ${isWiggling ? 'wiggle' : ''}`}
               style={{
                 transform: `translate(${noButtonPosition.x}px, ${noButtonPosition.y}px)`,
                 transition: isWiggling ? 'none' : 'transform 0.3s ease-out'
@@ -94,7 +94,7 @@ const LoveQuestionPage = () => {
         </div>
         
         {noButtonClicks > 3 && (
-          <p className="text-primary/70 mt-6 text-lg font-caveat animate-bounce">
+          <p className="text-amber-700/70 mt-6 text-lg font-mono animate-bounce">
             The "No" button seems to be running away from you! 😄
           </p>
         )}
