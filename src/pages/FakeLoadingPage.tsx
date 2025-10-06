@@ -10,7 +10,7 @@ const FakeLoadingPage = () => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [currentImage, setCurrentImage] = useState('');
 
-  // List of all images in loadimg folder
+  // ✅ Make sure these images are inside: /public/loadimg/
   const imageList = [
     'IMG_0463.png', 'IMG_0508.png', 'IMG_0509.png', 'IMG_0579.png', 'IMG_0581.png',
     'IMG_0860.png', 'IMG_0882.png', 'IMG_0906.png', 'IMG_0913.png', 'IMG_1019.png',
@@ -31,7 +31,7 @@ const FakeLoadingPage = () => {
     { text: "Ready to proceed!", duration: 800 }
   ];
 
-  // Function to get a random image
+  // Function to get a random image from the list
   const getRandomImage = () => {
     const randomIndex = Math.floor(Math.random() * imageList.length);
     return imageList[randomIndex];
@@ -40,15 +40,16 @@ const FakeLoadingPage = () => {
   useEffect(() => {
     const totalSteps = loadingSteps.length;
     let currentStep = 0;
-    
-    // Set initial image
+
+    // Set the first image immediately
     setCurrentImage(getRandomImage());
-    
-    // Image rotation interval - changes image every 2000ms (2 seconds)
+
+    // Change the image every 2 seconds
     const imageInterval = setInterval(() => {
       setCurrentImage(getRandomImage());
     }, 2000);
-    
+
+    // Simulate progress and steps
     const stepInterval = setInterval(() => {
       if (currentStep < totalSteps - 1) {
         currentStep++;
@@ -75,7 +76,7 @@ const FakeLoadingPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 relative overflow-hidden flex items-center justify-center px-4">
-      {/* Floating Elements */}
+      {/* Floating animated icons */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(15)].map((_, i) => (
           <div
@@ -93,27 +94,25 @@ const FakeLoadingPage = () => {
         ))}
       </div>
 
+      {/* Main Card */}
       <Card className="bg-white/95 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl max-w-md text-center border-0 relative z-10">
         <div className="mb-8">
           <div className="w-48 h-48 bg-gradient-to-r from-primary to-primary-glow rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden shadow-lg">
             {currentImage && (
-              <img 
-                src={`/src/img/loadimg/${currentImage}`}
+              <img
+                src={`/loadimg/${currentImage}`}
                 alt="Loading..."
                 className="w-44 h-44 object-cover rounded-full transition-all duration-500 ease-in-out hover:scale-105"
-                onError={(e) => {
-                  // Fallback to a random image if the current one fails to load
-                  setCurrentImage(getRandomImage());
-                }}
+                onError={() => setCurrentImage(getRandomImage())}
               />
             )}
           </div>
         </div>
-        
+
         <h1 className="text-2xl md:text-3xl font-bold text-primary mb-6 font-fredoka">
           Please Wait...
         </h1>
-        
+
         <div className="mb-6">
           <Progress value={progress} className="h-3 mb-4" />
           <p className="text-lg text-secondary-foreground font-medium animate-fade-in">
@@ -133,7 +132,7 @@ const FakeLoadingPage = () => {
             />
           ))}
         </div>
-        
+
         <p className="text-sm text-muted-foreground font-caveat">
           {progress < 100 ? `${Math.round(progress)}% complete` : 'Almost ready! 🎉'}
         </p>

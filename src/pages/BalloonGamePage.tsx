@@ -30,7 +30,7 @@ const BalloonGamePage = () => {
   const [poppedImages, setPoppedImages] = useState<PoppedImage[]>([]);
   const [usedImages, setUsedImages] = useState<Set<string>>(new Set());
 
-  // List of all images from mainimg folder
+  // List of all images from public/img/mainimg folder
   const mainImages = [
     'IMG_9813.png', 'IMG_9812.png', 'IMG_9804.png', 'IMG_9502.png', 'IMG_9495.png',
     'IMG_7911.png', 'IMG_7600.png', 'IMG_7587.png', 'IMG_7489.png', 'IMG_6803.png',
@@ -58,7 +58,6 @@ const BalloonGamePage = () => {
   const getRandomUnusedImage = () => {
     const availableImages = mainImages.filter(img => !usedImages.has(img));
     if (availableImages.length === 0) {
-      // If all images have been used, reset the used images set
       setUsedImages(new Set());
       return mainImages[Math.floor(Math.random() * mainImages.length)];
     }
@@ -85,19 +84,13 @@ const BalloonGamePage = () => {
     if (!balloon) return;
 
     setBalloons(prev => 
-      prev.map(balloon => 
-        balloon.id === balloonId 
-          ? { ...balloon, popped: true }
-          : balloon
-      )
+      prev.map(b => b.id === balloonId ? { ...b, popped: true } : b)
     );
     setScore(prev => prev + 10);
 
-    // Add popped image to display
     if (balloon.image) {
-      // Mark this image as used
       setUsedImages(prev => new Set([...prev, balloon.image!]));
-      
+
       const newPoppedImage: PoppedImage = {
         id: Date.now() + Math.random(),
         x: balloon.x,
@@ -107,18 +100,16 @@ const BalloonGamePage = () => {
       };
       setPoppedImages(prev => [...prev, newPoppedImage]);
 
-      // Remove the popped image after 3 seconds
       setTimeout(() => {
         setPoppedImages(prev => prev.filter(img => img.id !== newPoppedImage.id));
       }, 3000);
     }
 
-    // Check if all balloons are popped
-    const updatedBalloons = balloons.map(balloon => 
-      balloon.id === balloonId ? { ...balloon, popped: true } : balloon
+    const updatedBalloons = balloons.map(b => 
+      b.id === balloonId ? { ...b, popped: true } : b
     );
     
-    if (updatedBalloons.every(balloon => balloon.popped)) {
+    if (updatedBalloons.every(b => b.popped)) {
       setTimeout(() => setGameComplete(true), 500);
     }
   };
@@ -129,9 +120,9 @@ const BalloonGamePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 relative overflow-hidden">
-      {/* Game Header */}
+      {/* Header */}
       <div className="absolute top-6 left-6 right-6 z-10">
-        <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border-0 shadow-lg border border-amber-200/50">
+        <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl shadow-lg border border-amber-200/50">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-bold text-amber-800 font-mono">
               Pop the Balloons! 🎈
@@ -144,9 +135,9 @@ const BalloonGamePage = () => {
         </Card>
       </div>
 
-      {/* Balloons Game Area */}
+      {/* Balloons */}
       <div className="absolute inset-0 pt-24 pb-6">
-        {balloons.map((balloon) => (
+        {balloons.map(balloon => (
           <div
             key={balloon.id}
             className={`absolute cursor-pointer transform transition-all duration-300 ${
@@ -164,13 +155,12 @@ const BalloonGamePage = () => {
               className={`w-full h-full rounded-full ${balloon.color} opacity-80 shadow-lg flex items-center justify-center relative`}
             >
               <Heart className="w-6 h-6 text-amber-50 animate-pulse" />
-              {/* Balloon string */}
               <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0.5 h-8 bg-stone-400"></div>
             </div>
           </div>
         ))}
 
-        {/* Popped Images Display */}
+        {/* ✅ Fixed image path here */}
         {poppedImages.map((poppedImage) => (
           <div
             key={poppedImage.id}
@@ -182,23 +172,19 @@ const BalloonGamePage = () => {
             }}
           >
             <div className="relative">
-              {/* Cute frame around the image */}
               <div className="w-32 h-32 bg-white rounded-2xl shadow-2xl border-4 border-amber-200 p-2 animate-bounce">
                 <img
-                  src={`/src/img/mainimg/${poppedImage.image}`}
+                  src={`/img/mainimg/${poppedImage.image}`}
                   alt="Surprise!"
                   className="w-full h-full object-cover rounded-xl"
                   onError={(e) => {
-                    // Hide the image if it fails to load
                     e.currentTarget.style.display = 'none';
                   }}
                 />
-                {/* Sparkle effects */}
                 <div className="absolute -top-2 -right-2 w-4 h-4 bg-amber-300 rounded-full animate-ping"></div>
                 <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-amber-200 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
                 <div className="absolute top-1/2 -right-3 w-2 h-2 bg-stone-300 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
               </div>
-              {/* Heart floating above */}
               <div className="absolute -top-8 left-1/2 transform -translate-x-1/2">
                 <Heart className="w-6 h-6 text-amber-700 animate-bounce" />
               </div>
@@ -207,7 +193,6 @@ const BalloonGamePage = () => {
         ))}
       </div>
 
-      {/* Game Complete Modal */}
       {gameComplete && (
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-20 p-4">
           <Card className="bg-white p-8 md:p-12 rounded-3xl shadow-2xl max-w-md text-center border-0 animate-scale-in border border-amber-200/50">
@@ -236,7 +221,6 @@ const BalloonGamePage = () => {
         </div>
       )}
 
-      {/* Instructions */}
       {!gameComplete && score === 0 && (
         <div className="absolute bottom-6 left-6 right-6">
           <Card className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border-0 shadow-lg text-center border border-amber-200/50">
