@@ -84,30 +84,33 @@ const LandingPage = () => {
       {/* Intro looping video */}
       <div className="absolute top-8 left-1/2 -translate-x-1/2 z-10 text-center select-none">
         <div className="relative mx-auto w-40 h-40 md:w-56 md:h-56 rounded-full overflow-hidden shadow-2xl ring-4 ring-amber-600/30">
-          <video
-            ref={videoRef}
-            autoPlay
-            muted={muted}
-            loop
-            playsInline
-            preload="auto"
-            controls={!muted}
-            className="w-full h-full object-cover"
-            style={{ transform: rotationDeg ? `rotate(${rotationDeg}deg) scale(1.08)` : undefined }}
-            onLoadedMetadata={() => {
-              const v = videoRef.current;
-              if (!v) return;
-              const isLandscape = v.videoWidth > v.videoHeight;
-              // If the source is landscape, rotate to fit the circular portrait layout
-              // Use -90deg to avoid upside-down orientation on some devices
-              setRotationDeg(isLandscape ? -90 : 0);
-            }}
-          >
-            {/* Prefer WebM (VP9/Opus) for Chrome/Android */}
-            <source src={introWebm} type="video/webm" />
-            {/* Fallback to MP4 (H.264/AAC) from public if present */}
-            <source src="/intro/Untitled.mp4" type="video/mp4" />
-          </video>
+        <video
+          ref={videoRef}
+          autoPlay
+          muted={muted}
+          loop
+          playsInline
+          preload="auto"
+          controls={!muted}
+          className="w-full h-full object-cover"
+          style={{ transform: rotationDeg ? `rotate(${rotationDeg}deg) scale(1.08)` : undefined }}
+          onLoadedMetadata={() => {
+            const v = videoRef.current;
+            if (!v) return;
+            const isLandscape = v.videoWidth > v.videoHeight;
+            setRotationDeg(isLandscape ? -90 : 0);
+          }}
+>       
+          {/* Prefer WebM (VP9/Opus) for Chrome/Android */}
+          <source src="/intro/Untitled.webm" type="video/webm" />
+
+          {/* Fallback to MP4 (H.264/AAC) for Safari/iPhone */}
+          <source src="/intro/Untitled.mp4" type="video/mp4" />
+
+          {/* Optional message if video can't load */}
+          Your browser does not support the video tag.
+        </video>
+
           {muted && (
             <button
               onClick={() => {
