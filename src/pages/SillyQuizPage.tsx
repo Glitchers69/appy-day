@@ -165,7 +165,7 @@ const SillyQuizPage = () => {
         <div className="mb-8 transform transition-all duration-300">
           <div className="text-5xl mb-4 animate-bounce">{emoji}</div>
           <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-amber-800 to-amber-600 bg-clip-text text-transparent mb-2 font-mono">
-            The Silly Love Quiz!
+            The Silly Quiz
           </h1>
           <p className="text-amber-700/70 text-lg">
             Question {currentQuestion + 1} of {questions.length}
